@@ -4,7 +4,7 @@ WORKDIR /app
 
 # Install system dependencies if any are needed in the future
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
+    build-essential \   
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .

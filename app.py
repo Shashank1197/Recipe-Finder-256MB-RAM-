@@ -48,7 +48,7 @@ def search_recipes():
     except Exception as e:
         return jsonify({
             "status": "error",
-            "message": "The database is currently unreachable. Please make sure Neo4j is running and connection credentials in your .env file are correct."
+            "message": f"Database error: {str(e)}"
         }), 500
 
 @app.route('/suggestions', methods=['GET'])
@@ -68,8 +68,9 @@ def ingredient_suggestions():
     except Exception as e:
         return jsonify({
             "status": "error",
-            "message": "Unable to fetch autocomplete suggestions."
+            "message": f"Unable to fetch suggestions: {str(e)}"
         }), 500
+
 
 if __name__ == '__main__':
     port = int(os.getenv("PORT", 5000))
