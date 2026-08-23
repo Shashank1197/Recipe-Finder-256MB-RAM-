@@ -1,0 +1,400 @@
+/* Core Variables & Design System */
+:root {
+    --bg-dark: #080c10;
+    --card-bg-glass: rgba(255, 255, 255, 0.02);
+    --card-border-glass: rgba(255, 255, 255, 0.08);
+    --text-primary: #f3f4f6;
+    --text-secondary: #a1a1aa;
+    --text-muted: #71717a;
+    
+    /* Elegant Culinary Palette (Tuned Green & Warm Accents) */
+    --accent-emerald: #10b981;
+    --accent-emerald-glow: rgba(16, 185, 129, 0.25);
+    --accent-emerald-hover: #059669;
+    
+    --difficulty-easy: #34d399;
+    --difficulty-medium: #f59e0b;
+    --difficulty-hard: #f87171;
+    
+    --font-primary: 'Plus Jakarta Sans', sans-serif;
+    --font-heading: 'Outfit', sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    font-family: var(--font-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Background overlay with premium radial gradients */
+.bg-gradient-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 10% 15%, rgba(16, 185, 129, 0.06) 0%, transparent 40%),
+        radial-gradient(circle at 90% 85%, rgba(245, 158, 11, 0.04) 0%, transparent 40%),
+        linear-gradient(135deg, #090d12 0%, #020406 100%);
+    z-index: -1;
+}
+
+/* Typography */
+.main-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    background: linear-gradient(135deg, #ffffff 40%, #a7f3d0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.03em;
+}
+
+.text-muted-custom {
+    color: var(--text-secondary);
+}
+
+.text-muted-custom-light {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.text-light-custom {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 1.15rem;
+}
+
+/* Logo icon badge */
+.logo-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    border-radius: 22px;
+    font-size: 2.25rem;
+    color: var(--accent-emerald);
+    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.15);
+    margin-bottom: 1.25rem;
+}
+
+/* Search Glass Card Container */
+.search-glass-card {
+    background: var(--card-bg-glass);
+    border: 1px solid var(--card-border-glass);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 26px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-glass-card:hover {
+    border-color: rgba(16, 185, 129, 0.25);
+    box-shadow: 0 25px 50px -12px rgba(16, 185, 129, 0.06);
+}
+
+/* Input boxes */
+.search-input {
+    background: rgba(0, 0, 0, 0.35) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    color: #ffffff !important;
+    border-radius: 16px !important;
+    padding: 1.1rem 1.4rem !important;
+    font-size: 1.05rem !important;
+    transition: all 0.3s ease !important;
+}
+
+.search-input:focus {
+    outline: none !important;
+    border-color: var(--accent-emerald) !important;
+    box-shadow: 0 0 0 4px var(--accent-emerald-glow) !important;
+}
+
+.color-accent {
+    color: var(--accent-emerald);
+}
+
+/* Suggestions / Autocomplete Popover */
+.suggestions-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: rgba(12, 17, 23, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--card-border-glass);
+    border-radius: 16px;
+    z-index: 1000;
+    max-height: 250px;
+    overflow-y: auto;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    padding: 0.6rem;
+}
+
+.suggestion-item {
+    padding: 0.8rem 1.1rem;
+    cursor: pointer;
+    border-radius: 10px;
+    color: var(--text-secondary);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+}
+
+.suggestion-item:hover, .suggestion-item.active {
+    background: rgba(16, 185, 129, 0.15);
+    color: #ffffff;
+    padding-left: 1.35rem;
+}
+
+.suggestion-item strong {
+    color: var(--accent-emerald);
+    font-weight: 600;
+}
+
+/* Premium Gradient Search Button */
+.btn-search {
+    background: linear-gradient(135deg, var(--accent-emerald) 0%, var(--accent-emerald-hover) 100%);
+    color: #ffffff;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    border: none;
+    border-radius: 16px;
+    padding: 1rem;
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.2);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-search:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(16, 185, 129, 0.4);
+    background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+    color: #ffffff;
+}
+
+.btn-search:active {
+    transform: translateY(0);
+}
+
+/* Dynamic Recipe Cards Grid */
+.recipe-card {
+    background: rgba(255, 255, 255, 0.015) !important;
+    border: 1px solid var(--card-border-glass) !important;
+    border-radius: 24px !important;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.recipe-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(16, 185, 129, 0.35) !important;
+    box-shadow: 0 25px 40px rgba(0, 0, 0, 0.45), 0 0 20px rgba(16, 185, 129, 0.04);
+}
+
+.recipe-card .card-title {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    line-height: 1.4;
+    color: #ffffff;
+}
+
+/* Difficulty Badges */
+.badge-difficulty {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 0.4em 0.7em;
+    font-size: 0.8rem;
+}
+
+.difficulty-easy {
+    background: rgba(52, 211, 153, 0.12) !important;
+    color: var(--difficulty-easy) !important;
+}
+
+.difficulty-medium {
+    background: rgba(245, 158, 11, 0.12) !important;
+    color: var(--difficulty-medium) !important;
+}
+
+.difficulty-hard {
+    background: rgba(248, 113, 113, 0.12) !important;
+    color: var(--difficulty-hard) !important;
+}
+
+/* Custom Badges */
+.badge-vegan {
+    background: rgba(16, 185, 129, 0.12) !important;
+    color: #10b981 !important;
+    border: 1px solid rgba(16, 185, 129, 0.22) !important;
+}
+
+.badge-vegetarian {
+    background: rgba(52, 211, 153, 0.12) !important;
+    color: #34d399 !important;
+    border: 1px solid rgba(52, 211, 153, 0.22) !important;
+}
+
+.badge-gf {
+    background: rgba(99, 102, 241, 0.12) !important;
+    color: #818cf8 !important;
+    border: 1px solid rgba(99, 102, 241, 0.22) !important;
+}
+
+.badge-keto {
+    background: rgba(245, 158, 11, 0.12) !important;
+    color: #fbbf24 !important;
+    border: 1px solid rgba(245, 158, 11, 0.22) !important;
+}
+
+.badge-protein {
+    background: rgba(236, 72, 153, 0.12) !important;
+    color: #f472b6 !important;
+    border: 1px solid rgba(236, 72, 153, 0.22) !important;
+}
+
+/* Missing Section Layout */
+.recipe-missing-section {
+    background: rgba(239, 68, 68, 0.02);
+    border: 1px solid rgba(239, 68, 68, 0.12);
+    border-radius: 16px;
+    padding: 0.95rem;
+}
+
+.recipe-missing-section.success-section {
+    background: rgba(16, 185, 129, 0.05);
+    border: 1px solid rgba(16, 185, 129, 0.15);
+}
+
+.text-danger-light {
+    color: #fca5a5;
+    font-family: var(--font-heading);
+}
+
+.missing-item {
+    font-size: 0.9rem;
+    color: #fca5a5;
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+}
+
+.missing-item:last-child {
+    margin-bottom: 0;
+}
+
+.missing-item i {
+    font-size: 0.85rem;
+}
+
+/* Searching indicators tags */
+.badge-indicator {
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    color: var(--accent-emerald);
+    font-weight: 500;
+    padding: 0.6em 0.9em;
+    font-size: 0.85rem;
+    border-radius: 10px;
+}
+
+/* Empty states */
+.empty-state-card, .initial-state-card {
+    background: var(--card-bg-glass);
+    border: 1px dashed rgba(255, 255, 255, 0.12);
+    border-radius: 26px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.empty-icon-wrapper, .initial-icon-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 88px;
+    height: 88px;
+    border-radius: 24px;
+    font-size: 2.75rem;
+}
+
+.empty-icon-wrapper {
+    color: rgba(239, 68, 68, 0.45);
+    background: rgba(239, 68, 68, 0.03);
+    border: 1px solid rgba(239, 68, 68, 0.1);
+}
+
+.initial-icon-wrapper {
+    color: rgba(16, 185, 129, 0.35);
+    background: rgba(16, 185, 129, 0.03);
+    border: 1px solid rgba(16, 185, 129, 0.1);
+}
+
+/* Custom Alert Danger container */
+.alert-danger-custom {
+    background: rgba(239, 68, 68, 0.08) !important;
+    border: 1px solid rgba(239, 68, 68, 0.25) !important;
+    color: #fecaca !important;
+    border-radius: 18px !important;
+}
+
+/* Keyframe animations */
+.animate-fade-in {
+    animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-up {
+    animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-scale-up {
+    animation: scaleUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-pulse {
+    animation: pulse 2.5s infinite;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleUp {
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.75; }
+    100% { transform: scale(1); opacity: 1; }
+}
