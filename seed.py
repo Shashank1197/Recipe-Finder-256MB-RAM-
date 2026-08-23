@@ -274,17 +274,18 @@ SUBSTITUTIONS = [
 ]
 
 def seed_database():
-    uri = os.getenv("NEO4J_URI", "bolt://localhost:7687")
-    username = os.getenv("NEO4J_USERNAME", "neo4j")
-    password = os.getenv("NEO4J_PASSWORD", "password")
+    uri = os.getenv("COGNODB_URI") or os.getenv("NEO4J_URI", "bolt://localhost:7687")
+    username = os.getenv("COGNODB_USERNAME") or os.getenv("NEO4J_USERNAME", "cognodb")
+    password = os.getenv("COGNODB_PASSWORD") or os.getenv("NEO4J_PASSWORD", "password")
 
-    print(f"Connecting to Neo4j at {uri}...")
+    print(f"Connecting to CognoDB at {uri}...")
     try:
         driver = GraphDatabase.driver(uri, auth=(username, password))
         driver.verify_connectivity()
     except Exception as e:
-        print(f"CRITICAL ERROR: Could not connect to Neo4j database: {e}")
+        print(f"CRITICAL ERROR: Could not connect to CognoDB database: {e}")
         return
+
 
     with driver.session() as session:
         # 1. Clear existing database for a clean start (Optional, but useful for seed testing)

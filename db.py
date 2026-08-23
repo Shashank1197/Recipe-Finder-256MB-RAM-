@@ -9,16 +9,16 @@ _driver = None
 
 def get_driver():
     """
-    Get or initialize the global Neo4j driver instance.
+    Get or initialize the global CognoDB driver instance.
     Includes connection error handling and validation.
     """
     global _driver
     if _driver is not None:
         return _driver
 
-    uri = os.getenv("NEO4J_URI", "bolt://localhost:7687")
-    username = os.getenv("NEO4J_USERNAME", "neo4j")
-    password = os.getenv("NEO4J_PASSWORD", "password")
+    uri = os.getenv("COGNODB_URI") or os.getenv("NEO4J_URI", "bolt://localhost:7687")
+    username = os.getenv("COGNODB_USERNAME") or os.getenv("NEO4J_USERNAME", "cognodb")
+    password = os.getenv("COGNODB_PASSWORD") or os.getenv("NEO4J_PASSWORD", "password")
 
     try:
         # Create driver instance with connection pool settings
@@ -27,22 +27,23 @@ def get_driver():
         _driver.verify_connectivity()
         return _driver
     except Exception as e:
-        print(f"Error initializing Neo4j driver: {e}")
+        print(f"Error initializing CognoDB driver: {e}")
         _driver = None
         raise e
 
 def close_driver():
     """
-    Close the global Neo4j driver instance.
+    Close the global CognoDB driver instance.
     """
     global _driver
     if _driver is not None:
         try:
             _driver.close()
         except Exception as e:
-            print(f"Error closing Neo4j driver: {e}")
+            print(f"Error closing CognoDB driver: {e}")
         finally:
             _driver = None
+
 
 def get_ingredient_suggestions(query_str):
     """
