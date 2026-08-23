@@ -11,7 +11,7 @@ app = Flask(__name__)
 # Register application context teardown to close Neo4j driver
 @app.teardown_appcontext
 def shutdown_driver(exception=None):
-    db.close_driver()
+    db.close_driver()      
 
 @app.route('/')
 def index():
