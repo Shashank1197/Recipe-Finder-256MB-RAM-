@@ -82,8 +82,8 @@ def search_recipes_by_ingredients(ingredients_list):
     if not ingredients_list:
         return []
 
-    # Normalize ingredients: lower-case and strip spaces
-    input_ingredients = [ing.strip().lower() for ing in ingredients_list if ing.strip()]
+    # Normalize ingredients: lower-case, strip spaces, and remove duplicates
+    input_ingredients = sorted(list(set(ing.strip().lower() for ing in ingredients_list if ing.strip())))
     if not input_ingredients:
         return []
 
@@ -92,13 +92,16 @@ def search_recipes_by_ingredients(ingredients_list):
         
         # Parameterized 2-hop query.
         # Finds recipes 'r' that require 'req' where 'req' matches the user's input 'sub'
-        # either directly (req = sub) or through a SUBSTITUTES relationship (req - SUBSTITUTES - sub).
+        # either directly (req = sub) or through a SUBSTITUTES relationship.
+        # Note: We use sub_temp to avoid CognoDB's optional match variable-rebinding bug.
         query = """
         MATCH (sub:Ingredient)
         WHERE toLower(sub.name) IN $input_ingredients
         
         MATCH (r:Recipe)-[:REQUIRES]->(req:Ingredient)
-        WHERE req = sub OR (req)-[:SUBSTITUTES]-(sub)
+        OPTIONAL MATCH (req)-[rel:SUBSTITUTES]-(sub_temp)
+        WITH r, sub, req, rel, sub_temp
+        WHERE req = sub OR (rel IS NOT NULL AND sub_temp = sub)
         
         WITH r, count(DISTINCT sub.name) AS match_count
         WHERE match_count = size($input_ingredients)
